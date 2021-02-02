@@ -1,0 +1,27 @@
+project detail
+https://github.com/davidtsadler/ebay-sdk-examples
+
+
+Requirements
+
+PHP 5.3.3 or greater with the following extensions:
+cURL
+libxml
+SSL enabled on the cURL extension so that https requests can be made.
+Installation
+
+Download the project.
+
+git clone https://github.com/davidtsadler/ebay-sdk-examples.git
+From the ebay-sdk-examples directory install Composer with:
+
+curl -sS https://getcomposer.org/installer | php
+Install the dependencies.
+
+php composer.phar install
+Configuration
+
+All the examples load configuration settings from a configuration.php file located in the root of the project directory. This file can be created by running the following command inside the ebay-sdk-examples directory:
+
+   copy configuration.php.example configuration.php
+Edit the resulting configuration.php file and specify your eBay application keys. Ensure that you enter values for both the sandbox and production enviroments.

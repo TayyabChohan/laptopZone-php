@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header>
+    <ebl:RequesterCredentials xmlns:ns="urn:ebay:apis:eBLBaseComponents" xmlns:ebl="urn:ebay:apis:eBLBaseComponents" soapenv:mustUnderstand="0">
+      <ebl:NotificationSignature xmlns:ebl="urn:ebay:apis:eBLBaseComponents">9hJXr9QTtck33I/4wg135A==</ebl:NotificationSignature>
+    </ebl:RequesterCredentials>
+  </soapenv:Header>
+  <soapenv:Body>
+    <GetMemberMessagesResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2007-09-14T17:07:41.984Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>212251260</CorrelationID>
+      <Version>527</Version>
+      <Build>e527_core_Bundled_5195980_R1</Build>
+      <NotificationEventName>AskSellerQuestion</NotificationEventName>
+      <RecipientUserID>trachtenberga</RecipientUserID>
+      <MemberMessage>
+        <MemberMessageExchange>
+          <Item>
+            <ItemID>110023418059</ItemID>
+            <ListingDetails>
+              <StartTime>2007-09-14T16:38:15.000Z</StartTime>
+              <EndTime>2007-09-19T16:38:15.000Z</EndTime>
+              <ViewItemURL>http://cgi.sandbox.ebay.com/ws/eBayISAPI.dll?ViewItem&amp;item=110023418059&amp;category=14111</ViewItemURL>
+            </ListingDetails>
+            <Seller>
+              <UserID>trachtenberga</UserID>
+            </Seller>
+            <SellingStatus>
+              <CurrentPrice currencyID="USD">1.0</CurrentPrice>
+            </SellingStatus>
+            <TimeLeft>P4DT23H30M34S</TimeLeft>
+            <Title>Test Auction Title</Title>
+          </Item>
+          <Question>
+            <MessageType>AskSellerQuestion</MessageType>
+            <QuestionType>General</QuestionType>
+            <DisplayToPublic>false</DisplayToPublic>
+            <SenderID>adamsandbox70</SenderID>
+            <SenderEmail>ebaysandbox-70@trachtenberg.com</SenderEmail>
+            <RecipientID>409897</RecipientID>
+            <Subject>Question for item #110023418059 - Test Auction Title</Subject>
+            <Body>What is up?</Body>
+            <MessageID>369259</MessageID>
+          </Question>
+          <MessageStatus>Unanswered</MessageStatus>
+          <CreationDate>2007-09-14T17:07:41.000Z</CreationDate>
+          <LastModifiedDate>2007-09-14T17:07:41.000Z</LastModifiedDate>
+        </MemberMessageExchange>
+      </MemberMessage>
+      <PaginationResult>
+        <TotalNumberOfPages>1</TotalNumberOfPages>
+        <TotalNumberOfEntries>1</TotalNumberOfEntries>
+      </PaginationResult>
+      <HasMoreItems>false</HasMoreItems>
+    </GetMemberMessagesResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

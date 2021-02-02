@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "tests": {
+      "local": {
+        "QueryIntegrationTest": {
+            "testOrderByChildKey" : {
+                ".indexOn": "height"
+            }
+        }
+      },
+      "travis-ci": {
+          "QueryIntegrationTest": {
+              "testOrderByChildKey" : {
+                  ".indexOn": "height"
+              }
+          }
+      }
+    }
+  }
+}

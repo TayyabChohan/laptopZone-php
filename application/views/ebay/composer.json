@@ -1,0 +1,7 @@
+{
+    "require": {
+        "dts/ebay-sdk-php": "^12.0",
+        "guzzle/guzzle": "~3.9",
+        "guzzlehttp/guzzle": "^6.2"
+    }
+}

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Header>
+  <ebl:RequesterCredentials soapenv:mustUnderstand="0" xmlns:ns="urn:ebay:apis:eBLBaseComponents" xmlns:ebl="urn:ebay:apis:eBLBaseComponents">
+   <ebl:NotificationSignature xmlns:ebl="urn:ebay:apis:eBLBaseComponents">X51PjZk+e/M5DPumLe845A==</ebl:NotificationSignature>
+  </ebl:RequesterCredentials>
+ </soapenv:Header>
+ <soapenv:Body>
+  <GetItemResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+   <Timestamp>2007-09-17T23:57:01.607Z</Timestamp>
+   <Ack>Success</Ack>
+   <CorrelationID>212423390</CorrelationID>
+   <Version>529</Version>
+   <Build>e529_core_Bundled_5287364_R1</Build>
+   <NotificationEventName>OutBid</NotificationEventName>
+   <RecipientUserID>adamtest70</RecipientUserID>
+   <Item>
+    <AutoPay>false</AutoPay>
+    <BuyerProtection>ItemIneligible</BuyerProtection>
+    <BuyItNowPrice currencyID="USD">10.0</BuyItNowPrice>
+    <Country>US</Country>
+    <Currency>USD</Currency>
+    <GiftIcon>0</GiftIcon>
+    <HitCounter>NoHitCounter</HitCounter>
+    <ItemID>110023418059</ItemID>
+    <ListingDetails>
+     <Adult>false</Adult>
+     <BindingAuction>false</BindingAuction>
+     <CheckoutEnabled>true</CheckoutEnabled>
+     <ConvertedBuyItNowPrice currencyID="USD">10.0</ConvertedBuyItNowPrice>
+     <ConvertedStartPrice currencyID="USD">1.0</ConvertedStartPrice>
+     <HasReservePrice>false</HasReservePrice>
+     <StartTime>2007-09-14T16:38:15.000Z</StartTime>
+     <EndTime>2007-09-19T16:38:15.000Z</EndTime>
+     <ViewItemURL>http://cgi.sandbox.ebay.com/ws/eBayISAPI.dll?ViewItem&amp;item=110023418059&amp;category=14111</ViewItemURL>
+     <HasUnansweredQuestions>true</HasUnansweredQuestions>
+     <HasPublicMessages>false</HasPublicMessages>
+     <ExpressListing>false</ExpressListing>
+    </ListingDetails>
+    <ListingDuration>Days_5</ListingDuration>
+    <ListingType>Chinese</ListingType>
+    <Location>San Jose, CA</Location>
+    <PaymentMethods>PaymentSeeDescription</PaymentMethods>
+    <PrimaryCategory>
+     <CategoryID>14111</CategoryID>
+     <CategoryName>Everything Else:Test Auctions:General</CategoryName>
+    </PrimaryCategory>
+    <PrivateListing>false</PrivateListing>
+    <Quantity>1</Quantity>
+    <ReviseStatus>
+     <ItemRevised>false</ItemRevised>
+    </ReviseStatus>
+    <Seller>
+     <AboutMePage>false</AboutMePage>
+     <Email>Invalid Request</Email>
+     <FeedbackScore>1</FeedbackScore>
+     <FeedbackPrivate>false</FeedbackPrivate>
+     <FeedbackRatingStar>None</FeedbackRatingStar>
+     <IDVerified>true</IDVerified>
+     <eBayGoodStanding>true</eBayGoodStanding>
+     <NewUser>false</NewUser>
+     <RegistrationDate>2004-05-06T05:15:18.000Z</RegistrationDate>
+     <Site>US</Site>
+     <Status>Confirmed</Status>
+     <UserID>trachtenberga</UserID>
+     <UserIDChanged>false</UserIDChanged>
+     <UserIDLastChanged>2004-05-06T05:15:34.000Z</UserIDLastChanged>
+     <VATStatus>NoVATTax</VATStatus>
+     <SellerInfo>
+      <AllowPaymentEdit>true</AllowPaymentEdit>
+      <CheckoutEnabled>true</CheckoutEnabled>
+      <CIPBankAccountStored>false</CIPBankAccountStored>
+      <GoodStanding>true</GoodStanding>
+      <LiveAuctionAuthorized>false</LiveAuctionAuthorized>
+      <MerchandizingPref>OptIn</MerchandizingPref>
+      <QualifiesForB2BVAT>false</QualifiesForB2BVAT>
+      <SellerLevel>None</SellerLevel>
+      <StoreOwner>false</StoreOwner>
+      <ExpressEligible>false</ExpressEligible>
+      <ExpressWallet>false</ExpressWallet>
+      <SafePaymentExempt>true</SafePaymentExempt>
+     </SellerInfo>
+     <MotorsDealer>false</MotorsDealer>
+    </Seller>
+    <SellingStatus>
+     <BidCount>8</BidCount>
+     <BidIncrement currencyID="USD">0.25</BidIncrement>
+     <ConvertedCurrentPrice currencyID="USD">2.75</ConvertedCurrentPrice>
+     <CurrentPrice currencyID="USD">2.75</CurrentPrice>
+     <HighBidder>
+      <AboutMePage>false</AboutMePage>
+      <FeedbackScore>2</FeedbackScore>
+      <FeedbackRatingStar>None</FeedbackRatingStar>
+      <IDVerified>true</IDVerified>
+      <eBayGoodStanding>true</eBayGoodStanding>
+      <NewUser>false</NewUser>
+      <Status>Confirmed</Status>
+      <UserID>m***2</UserID>
+      <VATStatus>NoVATTax</VATStatus>
+      <UserAnonymized>true</UserAnonymized>
+     </HighBidder>
+     <MinimumToBid currencyID="USD">3.0</MinimumToBid>
+     <QuantitySold>0</QuantitySold>
+     <ReserveMet>true</ReserveMet>
+     <SecondChanceEligible>false</SecondChanceEligible>
+     <ListingStatus>Active</ListingStatus>
+    </SellingStatus>
+    <ShippingDetails>
+     <AllowPaymentEdit>true</AllowPaymentEdit>
+     <ApplyShippingDiscount>false</ApplyShippingDiscount>
+     <InsuranceOption>NotOffered</InsuranceOption>
+     <SalesTax>
+      <SalesTaxPercent>0.0</SalesTaxPercent>
+      <ShippingIncludedInTax>false</ShippingIncludedInTax>
+     </SalesTax>
+     <ThirdPartyCheckout>false</ThirdPartyCheckout>
+     <TaxTable/>
+    </ShippingDetails>
+    <ShipToLocations>US</ShipToLocations>
+    <Site>US</Site>
+    <StartPrice currencyID="USD">1.0</StartPrice>
+    <TimeLeft>P1DT16H41M14S</TimeLeft>
+    <Title>Test Auction Title</Title>
+    <HitCount>0</HitCount>
+    <GetItFast>false</GetItFast>
+    <PostalCode></PostalCode>
+    <ShippingTermsInDescription>true</ShippingTermsInDescription>
+    <ProxyItem>false</ProxyItem>
+   </Item>
+  </GetItemResponse>
+ </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,121 @@
+Platform Notifications
+
+Our Web services are great when you need information from eBay. For example, after an auction ends, call GetSellerTransactions to retrieve the final details about your listing, such as the winning bidder and price.
+
+However, in order for this to work well, you need to know exactly when the auction ends. Otherwise, you will either call eBay far too often or far too infrequently. If you do the first, you risk getting shut down because you're wasting our resources; if you do the second, you risk the buyer getting annoyed because you haven't contacted them in a timely manner.
+
+That isn't a problem with auction listings. You can calculate their end time based on when you listed the item and the listing's duration. But fixed priced listings end as soon as someone's willing to buy the item. That can be as soon as one second after you listed it, to one second before it ends, and any time in between. And with both formats of listings, you can never predict when a potential buyer may use the Ask Seller a Question to learn more about an item.
+
+With our regular APIs, there's no way to know what's going on without contacting polling us again and again and again. That's why eBay created Platform Notifications.
+
+With Platform Notifications, instead of making a call and waiting for a response, you provide eBay with a URL or email address, and then we deliver (or push) notifications when events occur. The technical term for this is an asynchronous communication. Or, in other words, don't call us. We'll call you.
+
+You can be notified after a listing has ended, a question has been asked, feedback has been left, or a number of other changes. Your application can then use the data sent in these notifications in the same way that you would use data returned by the API calls.
+
+This doesn't just apply to seller tools. Platform notifications also help buyer tools know when a person has been outbid, added an item to their watch list, or won an item.
+
+Unfortunately, due to the nature of the Internet, there's no good way for us to ensure all our notifications make their way from our data center to your computer. Therefore, even if your application uses notifications, you should still use API calls to double-check that you've received everything you need. However, because this rarely happens, you don't need to do this too frequently.
+
+Still, when you subscribe to Platform Notifications, you both drastically improve the timelyness of your reaction to changes on eBay and reduce the number of times you needs to call us to fetch data.
+
+** Getting Started
+
+Implementing platform notifications requires three steps:
+
+1) Write a script to listen for and process notifications sent from eBay.
+2) Call SetNotificationPreferences to let eBay know the location of this script.
+3) Call SetNotificationPreferences to let eBay know the specific notifications you wish to subscribe to for each of your eBay users.
+
+*** Writing a notification listener
+
+While a "notification listener" may sound complex, it isn't. It's actually a regular Web page with two minor differences. First, instead of the page being called by a Web browser, it's called via a script written by eBay. Second, instead of processing HTML form data, you manipulate XML documents.
+
+This XML document is actually a SOAP message, similar to the ones many people use to talk with eBay using our Web services APIs. Therefore, if you know how to implement a SOAP server, writing a platform notification listener is a piece of cake. Even if you don't, all you need to do is parse XML, just like you do with the responses we send back from our Web services APIs.
+
+You can choose to get your notifications via HTTP, HTTPS, or SMTP. In addition to the usual HTTP (or SMTP) Headers, we set a SOAPAction header. This value in this header is a URL that indicates the notification type. For example, for the AskSellerQuestion notification, it's "http://developer.ebay.com/notification/AskSellerQuestion". (Including the quotation marks.) The complete set of values is specified in the NotificationEventTypeCodeType type in the schema.
+
+Some SOAP toolkits use the SOAPAction to process the message. If yours does not, you can also determine the notification type within the SOAP envelope, and use that instead.
+
+The Content-Type header is also set to text/xml;charset=utf-8, so you know it's an XML document encoded using UTF-8.
+
+Here's a example of the HTTP Headers:
+
+POST /path/notifications.php HTTP/1.1
+Host: www.example.com 
+Content-Type: text/xml; charset="utf-8" 
+Content-Length: 1252 
+SOAPAction: "http://developer.ebay.com/notification/EndOfAuction"
+
+The HTTP body is a SOAP document, which itself has two parts: a SOAP header and a SOAP body. For example:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header>
+    <ebl:RequesterCredentials xmlns:ns="urn:ebay:apis:eBLBaseComponents"
+    	xmlns:ebl="urn:ebay:apis:eBLBaseComponents" soapenv:mustUnderstand="0">
+      <ebl:NotificationSignature xmlns:ebl="urn:ebay:apis:eBLBaseComponents">
+      	9hJXr9QTtck33I/4wg135A==
+      </ebl:NotificationSignature>
+    </ebl:RequesterCredentials>
+  </soapenv:Header>
+  <soapenv:Body>
+    <GetMemberMessagesResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2007-09-14T17:07:41.984Z</Timestamp>
+	  ... more XML here ...
+    </GetMemberMessagesResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+The SOAP Header contains a RequesterCredentials element. This element, in turn, has a NotificationSignature element. The notification signature is a string eBay provides to allow you to validate the authenticity of the message. Without it, anyone could send fake messages to your notification listener, and you'd have no way to knowing they weren't real.
+
+The signature is an Base64-encoded MD5 hash generated by concatenating the time the notification was sent along with your application keys. The formula is:
+
+Timestamp + DevId + AppId + Cert
+
+The Timestamp is the value of the Timestamp element in the message. In the example above, it is 2007-09-14T17:07:41.984Z. The timestamp is provided in GMT. If your SOAP toolkit or eBay SDK automatically converts this to local time, you must reconvert it back to GMT, or you will get a credential mismatch.
+
+Your DevId, AppId, and Cert at the keys you used to sign up for the notification, so they will vary between Product and the Sandbox.
+
+In PHP 5, calculate the signature using the following function:
+
+protected function CalculateSignature($Timestamp) {
+	$DevID = "MyDevID";
+	$AppID = "MyAppID";
+	$Cert  = "MyCert";
+
+	// Not quite sure why we need the pack('H*'), but we do
+	$Signature = base64_encode(pack('H*', md5("{$Timestamp}{$DevID}{$AppID}{$Cert}")));
+	return $Signature;
+}
+
+$Signature = CalculateSignature("2007-09-14T17:07:41.984Z");
+
+In C#, use this:
+
+private bool CalculateSignature(DateTime TimeStamp) { 
+  const string DevId = "MyDevID"; 
+  const string AppId = "MyAppID"; 
+  const string AuthCert = "MyCert"; 
+
+  // Converts the TimeStamp back to universal time, because in .NET, XML schema time values 
+  // are converted to local time 
+  // If you are retrieving the time stamp directly from the XML body of the notification 
+  // message, you would not need to convert it. 
+  string sig = TimeStamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ") + DevId + AppId + AuthCert; 
+  byte[] sigdata = System.Text.Encoding.ASCII.GetBytes(sig); 
+  System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider(); 
+  string md5Hash = System.Convert.ToBase64String(md5.ComputeHash(sigdata)); 
+  return md5Hash;
+}
+
+For more on using the MD5 library on Windows, read http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnw98bk/html/98gettingstarted.asp. Developers on Unix platforms, including Mac OS X, should check out the bindings between their language of choice and the OpenSSL library (http://www.openssl.org/).
+
+The SOAP message body contains a top-level element, the name of which is the call that was used to generate the data, with the word Response at the end. For example, the element name for the EndOfAuction call is GetItemTransactionsResponse. This element contains one attribute to specify the namespace: xmlns="urn:ebay:apis:eBLBaseComponents". Child elements include some elements common to all notifications, such as Timestamp, which specifies the time the notification was sent. Other child elements are specific to the notification being sent. In the EndOfAuction notification, the Item element contains most of the data for the notification.
+
+*** Letting eBay know the location of your script
+
+Your application can subscribe to notifications using SetNotificationPreferences and can check the preferences already set with GetNotificationPreferences. See SetNotificationPreferences and GetNotificationPreferences for more details. Your platform notification usage can be monitored with GetNotificationsUsage. For more information on GetNotificationsUsage and how to use it to troubleshoot notification problems, see GetNotificationsUsage.
+
+*** Subscribing to Notifications

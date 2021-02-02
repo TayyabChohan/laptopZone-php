@@ -1,0 +1,16 @@
+{
+    "name": "ecologix/firebase",
+    "description": "firebase db connection for php",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sajid Khan",
+            "email": "sajid.khan@ecologix.us"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "kreait/firebase-php": "^1.2"
+    }
+}
